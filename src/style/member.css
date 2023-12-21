@@ -1,0 +1,124 @@
+#account {
+    text-align: center;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    margin-bottom: 100px;
+}
+
+#login,
+#register {
+    border: 1px solid transparent;
+    margin-top: 0px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: rgb(251, 251, 251);
+    margin-top: -4px;
+}
+
+#tab-container {
+    display: block;
+    text-align: left;
+    padding: 5px;
+    margin-left: -100px;
+}
+
+#tab-content {
+    width: 600px;
+    margin-left: -100px;
+}
+
+.tab {
+    display: inline-block;
+    border: 1px solid transparent;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    margin-right: -5px;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    background-color: #c3c1c1
+}
+
+.tab:hover {
+    background-color: #dfdcdc;
+}
+
+.tab.active {
+    background-color: rgb(251, 251, 251);
+    border-color: #ccc;
+    font-weight: 800;
+}
+
+.tab-item {
+    display: none;
+    margin-top: 20px;
+}
+
+.tab-item.active {
+    display: block;
+}
+
+#logintitle,
+#registertitle {
+    margin: 20px;
+    letter-spacing: 5px;
+}
+
+#birthday {
+    width: 142px;
+}
+
+label[for="email"],
+label[for="password"] {
+    width: 100px;
+}
+
+label[for="gender"] {
+    width: 100px;
+}
+
+label[for="male"],
+label[for="female"] {
+    width: 50px;
+}
+
+label[for="birthday"] {
+    width: 50px;
+    margin-left: -75px;
+}
+
+input[type="date"] {
+    margin-left: -20px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #65cd69;
+}
+
+input[type="checkbox"][name="policy"] {
+    margin-left: -245px;
+}
+
+#forgetpassword {
+    font-size: 12px;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+input[type="submit"][value="立即加入"] {
+    margin-bottom: 20px;
+}

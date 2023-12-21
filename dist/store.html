@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>實體門市</title>
+  <link rel="stylesheet" href="../src/style/menustyle.css">
+  <link rel="stylesheet" href="../src/style/comment.css">
+  <link rel="stylesheet" href="../src/style/adstyle.css">
+  <link rel="stylesheet" href="../src/style/productsstyle.css">
+  <script src="https://kit.fontawesome.com/98c7318cff.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="shortcut icon" href="../src/image/favicon.ico" type="image/x-icon">
+</head>
+<style>
+  .store-title h1 {
+    display: block;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 10px;
+    font-size: 36px;
+    margin-top: 150px;
+  }
+
+  .store-title p {
+    display: block;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+  }
+
+  .sstore {
+    text-align: center;
+  }
+
+  .store {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
+  }
+
+  .store img {
+    width: 500px;
+  }
+
+  .store h5 {
+    margin-top: 20px;
+    font-size: 32px;
+    font-weight: 200;
+  }
+
+  .store p {
+    font-weight: 200;
+    margin: 10px;
+  }
+
+  .store>div {
+    border: 1px solid black;
+    font-size: 18px;
+    font-weight: 200;
+    letter-spacing: 5px;
+    display: inline;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  #map {
+    display: flex;
+    height: 600px;
+    width: 1100px;
+    margin-top: 50px;
+  }
+
+  .mmap {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+</style>
+<script>
+  $(function () {
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    if (cart && cart.length > 0) {
+      $('#piecesofcartitem').text(cart.length)
+      $('#piecesofcartitem').css('display', 'inline-block')
+    } else {
+      $('#piecesofcartitem').hide()
+    }
+  })
+  function initMap() {
+    // 定義多個地點資訊
+    const locations = [
+      {
+        name: "公益資展館",
+        lat: 24.150759559645326,
+        lng: 120.65108187115791
+      },
+      {
+        name: "北屯總太館",
+        lat: 24.158276424517208,
+        lng: 120.72748088279702
+      }
+    ];
+
+    // 計算矩形範圍
+    const bounds = new google.maps.LatLngBounds();
+    for (let i = 0; i < locations.length; i++) {
+      bounds.extend(new google.maps.LatLng(locations[i].lat, locations[i].lng));
+    }
+
+    // 初始化地圖，並將矩形範圍傳遞給 fitBounds 方法
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: bounds.getCenter(),
+    });
+    map.fitBounds(bounds);
+
+    // 在地圖上加入標記
+    for (let i = 0; i < locations.length; i++) {
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+        map: map,
+        title: locations[i].name,
+      });
+
+      // 為每個標記添加 click 事件監聽器
+      marker.addListener("click", () => {
+        const url = `https://www.google.com/maps/search/?api=1&query=${locations[i].lat},${locations[i].lng}`;
+        window.open(url, "_blank");
+      });
+    }
+  }
+
+
+</script>
+
+<body>
+  <!-- 聯絡我們彈出視窗 -->
+  <div id="comment" class="comment" onclick="closeComment()">
+    <!-- 事件捕獲(冒泡) -->
+    <div class="comment-content" onclick="event.stopPropagation()">
+      <h5>聯絡我們</h5>
+      <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>
+      <input type="radio" checked>電子郵件
+      <input type="radio">手機號碼<br>
+      <input type="text" class="email-input" placeholder="請輸入你的電子信箱"><br>
+      <input type="text" class="message-input" placeholder="請輸入你的訊息，詢問店內商品，請留下商品名稱，謝謝！">
+      <button id="comment-send">發送</button>
+    </div>
+  </div>
+  <header class="header_area">
+    <div class="main_header_area animated">
+      <div class="container">
+        <nav id="navigation1" class="navigation">
+          <div class="nav-header">
+            <a href="index.html"><img id='logo' src="../src/image/jasonlogo.png" alt="My Logo" width="75"
+                height="75"></a>
+            <a class="nav-brand" href="index.html">Jason.js素T專賣</a>
+            <div class="nav-toggle"></div>
+          </div>
+          <div class="nav-search">
+            <span class="nav-search-button"><i class="fas fa-magnifying-glass fa-lg"></i></span>
+            <span class="nav-comment-button" onclick="openComment()"><i class="fas fa-comment fa-lg"></i></span>
+            <a href="member.html"><span class="nav-user-button"><i class="fas fa-user fa-lg"></i></span></a>
+            <a href="chart.html"><span class="nav-cart-button"><i class="fas fa-shopping-basket fa-lg"></i></span></a>
+            <form>
+              <div class="nav-search-inner">
+                <input type="search" name="search" placeholder="找商品" />
+              </div>
+            </form>
+          </div>
+          <span id="piecesofcartitem">0</span>
+          <div class="nav-menus-wrapper">
+            <ul class="nav-menu align-to-left">
+              <li><a id="home" href="index.html" target="_blank" style="font-size: 15px;">首頁</a></li>
+              <li>
+                <a href="#" style="font-size: 15px;">版型風格</a>
+                <ul class="nav-dropdown">
+                  <li>
+                    <a href="#" style="font-size: 14px;">短袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank" style="font-size: 14px;">日常T ｜ 質感好穿搭</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">顯肌T ｜ 襯托傲人肌</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">重磅T ｜ 杜絕激凸</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">長袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li>
+                        <a href="#">敬請期待</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">重磅系列</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">內著系列</a></li>
+                </ul>
+              </li>
+              <li><a href="#" style="font-size: 15px;">穿搭指南</a></li>
+              <li>
+                <a href="#" style="font-size: 15px;">實體門市</a>
+                <ul class="nav-dropdown">
+                  <li><a href="#" target="_blank" style="font-size: 14px;">公益資展館</a></li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">北屯總太館</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div class="store-title">
+    <h1>實體門市</h1>
+    <p>STORE INFO +</p>
+  </div>
+  <div class="sstore">
+    <div class="store">
+      <img src="../src/image/公益.jpg" alt="Store 1">
+      <h5>公益資展館</h5>
+      <hr>
+      <p>台中市南屯區公益路二段51號18樓</p>
+      <p>Monday-Saturday &nbsp&nbsp&nbsp 11:00~21:30</p>
+      <br>
+      <div>門市資訊</div>
+    </div>
+    <div class="store">
+      <img src="../src/image/總太.jpg" alt="Store 2">
+      <h5>北屯總太館</h5>
+      <hr>
+      <p>台中市北屯區祥順路一段429號6樓</p>
+      <p>Monday-Saturday &nbsp&nbsp&nbsp 11:00~21:30</p>
+      <br>
+      <div>門市資訊</div>
+    </div>
+  </div>
+  <div class="mmap">
+    <div id="map"></div>
+  </div>
+  <footer class="site-footer">
+    <hr>
+    <div class="footer-container">
+      <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <h6>認識Jason.js</h6>
+          <ul class="footer-links">
+            <li><a href="#">blog</a></li>
+            <li><a href="#">關於我們</a></li>
+            <li><a href="#">產品製程</a></li>
+            <li><a href="#">門市據點</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon1.png">七天鑑賞期</h6>
+          <ul class="footer-links">
+            <li><a>全館使用Email，寄送電子發票。</a></li>
+            <li><a>商品退換貨請於收件內七天與客服聯繫</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon2.png">購物常見問題</h6>
+          <ul class="footer-links">
+            <li><a href="#">運送政策</a></li>
+            <li><a href="#">售後服務</a></li>
+            <li><a href="#">退換貨政策</a></li>
+            <li><a href="#">隱私權政策</a></li>
+            <li><a href="#">常見問題Q&A</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6>聯絡我們</h6>
+          <ul class="footer-links">
+            <li><a>週一至週五 09:00~17:00 (例假日除外)</a></li>
+            <li><a href="#">LINE1對1客服 請搜尋ID：【 @chih_chung_li 】</a></li>
+          </ul>
+          <div class="col-xs-6">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a class="line" href="#"><i class="fa-brands fa-line"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">&copy; 2023 Jason.js素T專賣</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvkdBSyAG1UJSeoC4ScR63YSs6CT8CPE&callback=initMap&v=beta&libraries=marker"
+  defer></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<script src="../src/js/menuscript.js"></script>
+
+</html>

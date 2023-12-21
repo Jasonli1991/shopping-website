@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>購物車</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://kit.fontawesome.com/98c7318cff.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../src/style/menustyle.css">
+  <link rel="stylesheet" href="../src/style/comment.css">
+  <link rel="stylesheet" href="../src/style/chart.css">
+  <link rel="shortcut icon" href="../src/image/favicon.ico" type="image/x-icon">
+</head>
+
+<script>
+    $(function() {
+    // 取得存放在 localStorage 的資料
+    let cartItems = JSON.parse(localStorage.getItem('cart'))
+    if (!cartItems) {
+        cartItems = []
+        $('.cart-items-total').hide()
+    } else {
+        $(function() {
+            updateTotalPrice()
+        })
+        // 渲染購物車項目
+        $.each(cartItems, function(index, item) {
+            let $row = $('<div class="cart-item"></div>')
+            let $img = $('<div class="product-image"><img class="item-image"></div>').find('.item-image').attr('src', item.image)
+            let $name = $('<h1 class="item-name"></h1>').text(item.name)
+            let $id = $('<p class="item-id"></p>').text(item.id)
+            let $color = $('<p class="item-color">').text(item.color)
+            let $size = $('<p class="item-size">').text(item.size)
+            let $ppp = $('<div class="product-details"></div>')
+            let $iii = $('<div class="item"></div>')
+
+            let $minusButton = $('<button class="minus-item">-</button>')
+            let $quantity = $('<span class="item-quantity"></span>').text(item.quantity)
+            let $plusButton = $('<button class="plus-item">+</button>')
+            let $qqq = $('<div class="quantity"></div>')
+
+            let $price = $('<div class="item-price"></div>').text(item.price)
+            let $subtotal = $('<div class="item-subtotal"></div>').text(item.price * item.quantity)
+            let $removeButton = $('<span class="remove-item"><i class="fas fa-trash-can fa-xl"></i></span>')
+            let $rrr = $('<div class="remove"></div>')
+            $ppp.append($name, $id, $color, $size)
+            $iii.append($img, $ppp)
+            $qqq.append($minusButton, $quantity, $plusButton)
+            $rrr.append($removeButton)
+            $row.append($iii, $qqq, $price, $subtotal, $rrr)
+            $('#cart-items').append($row)
+
+            // 增加數量的按鈕
+            $plusButton.click(function() {
+                let currentQuantity = parseInt($quantity.text())
+                $quantity.text(currentQuantity + 1)
+                $subtotal.text(item.price * (currentQuantity + 1))
+                updateLocalStorage()
+                updateTotalPrice()
+            })
+    
+            // 減少數量的按鈕
+            $minusButton.click(function() {
+                let currentQuantity = parseInt($quantity.text())
+                if (currentQuantity > 1) {
+                    $quantity.text(currentQuantity - 1)
+                    $subtotal.text(item.price * (currentQuantity - 1))
+                } else {
+                    $row.remove()
+                    //購物車空時，#cart-items的length是7
+                    // alert($('#cart-items').html().length)
+                    cartItems = cartItems.filter(function(element) {
+                        return element.id !== item.id               
+                    })
+                    if ($('#cart-items').html().length === 7) {
+                        alert('你的購物車是空的')
+                        $('.cart-arrow-down').show()
+                        $('#totalprice').text("你的購物車是空的")
+                        $('.basket-labels').css('display', 'none')
+                        $('#piecesofcartitem').hide()
+                        $('.buynofare').hide()
+                    }
+                }
+                updateLocalStorage()
+                updateTotalPrice()
+            })
+    
+            // 移除項目的按鈕
+            $removeButton.click(function() {
+              if (confirm("確定要移除這項商品嗎？")) {
+                $row.remove()
+                //購物車空時，#cart-items的length是7
+                // alert($('#cart-items').html().length)
+                if ($('#cart-items').html().length === 7) {
+                    alert('你的購物車是空的')
+                    $('.cart-arrow-down').show()
+                    $('#totalprice').text("你的購物車是空的")
+                    $('.basket-labels').css('display', 'none')
+                    $('#piecesofcartitem').hide()
+                    $('.buynofare').hide()
+                }
+                updateLocalStorage()
+                updateTotalPrice()
+                } else {
+              }
+            })
+        })
+        // 清空購物車的按鈕
+        $('#clear-cart').click(function() {
+            // 將購物車項目刪除
+            $('#cart-items').empty()
+            // 將購物車項目從 localStorage 中移除
+            localStorage.removeItem('cart')
+            alert('你的購物車是空的')
+            $('#totalprice').text("你的購物車是空的")
+            $('.basket-labels').css('display', 'none')
+            $('#piecesofcartitem').hide()
+
+            // $('#clear-cart').prop('disabled', true);
+            updateTotalPrice()
+        })
+    }
+
+    // 更新 localStorage 中的資料
+    function updateLocalStorage() {
+        let updatedItems = []
+        $('.cart-item').each(function() {
+            let id = $(this).find('.item-id').text()
+            let name = $(this).find('.item-name').text()
+            let price = $(this).find('.item-price').text()
+            let image = $(this).find('.item-image').attr('src')
+            let color = $(this).find('.item-color').text()
+            let size = $(this).find('.item-size').text()
+            let quantity = $(this).find('.item-quantity').text()
+            updatedItems.push({
+                id: id,
+                name: name,
+                price: price,
+                image: image,
+                color: color,
+                size: size,
+                quantity: quantity,
+            })
+        })
+        localStorage.setItem('cart', JSON.stringify(updatedItems))
+    }
+
+    //更新購物車總金額
+    function updateTotalPrice() {
+        let totalPrice = 0
+        let cartItems = JSON.parse(localStorage.getItem('cart'))
+        $('.cart-item').each(function() {
+            let subtotal = parseFloat($(this).find('.item-subtotal').text())
+            totalPrice += subtotal
+        })
+
+        if (totalPrice === 0) {
+            $('.cart-items-total').hide()
+        } else {
+            $('#total-price').text(totalPrice.toFixed(0))
+            $('#piecesofcartitem').text(cartItems.length)
+            $('#piecesofcartitem').show()
+            if (totalPrice.toFixed(0) >= 2000) {
+              $('.buynofare').hide()
+              $('.fare-value').text(0)
+              $('.total-value').text(totalPrice.toFixed(0))
+            } else {
+              $('.fare-value').text(80)
+              $('#buynofarevalue').text(2000 - parseInt(totalPrice.toFixed(0)))
+              $('.total-value').text(parseInt(totalPrice.toFixed(0)) + 80)
+              $('.buynofare').show()
+            }
+        }
+    }
+
+
+    // 避免清除localStorage資料，用回到上一頁動作取代
+    $(function() {
+	    $('#go-to-home,.promo-code-cta').click(function() {
+		    window.history.back()
+	    })
+    })
+
+    // 載入購物車內容
+	function loadCart() {
+		cartItems = JSON.parse(localStorage.getItem('cart')) || []
+        if (cartItems.length === 0) {
+            alert('你的購物車是空的')
+            $('#totalprice').text("你的購物車是空的")
+            $('.basket-labels').css('display', 'none')
+            $('#piecesofcartitem').hide()
+        } else {
+            $('.cart-arrow-down').hide()
+        }
+    }
+	// 載入購物車內容
+	loadCart()
+
+})
+</script>
+<body>
+  <header class="header_area">
+    <div class="main_header_area animated">
+      <div class="container">
+        <nav id="navigation1" class="navigation">
+          <div class="nav-header">
+            <a href="index.html"><img id='logo' src="../src/image/jasonlogo.png" alt="My Logo" width="75" height="75"></a>
+            <a class="nav-brand" href="index.html">Jason.js素T專賣</a>
+            <div class="nav-toggle"></div>
+          </div>
+          <div class="nav-search">
+            <span class="nav-search-button"><i class="fas fa-magnifying-glass fa-lg"></i></span>
+            <span class="nav-comment-button" onclick="openComment()"><i class="fas fa-comment fa-lg"></i></span>
+            <a href="member.html"><span class="nav-user-button"><i class="fas fa-user fa-lg"></i></span></a>
+            <a href="chart.html"><span class="nav-cart-button"><i class="fas fa-shopping-basket fa-lg"></i></span></a>
+            <form>
+              <div class="nav-search-inner">
+                <input type="search" name="search" placeholder="找商品"/>
+              </div>
+            </form>
+          </div>
+          <span id="piecesofcartitem">0</span>
+          <div class="nav-menus-wrapper">
+            <ul class="nav-menu align-to-left">
+              <li><a id="home" href="index.html" target="_blank" style="font-size: 15px;">首頁</a></li>
+              <li>
+                <a href="#" style="font-size: 15px;">版型風格</a>
+                <ul class="nav-dropdown">
+                  <li>
+                    <a href="#" style="font-size: 14px;">短袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank" style="font-size: 14px;">日常T ｜ 質感好穿搭</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">顯肌T ｜ 襯托傲人肌</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">重磅T ｜ 杜絕激凸</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">長袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li>    
+                        <a href="#">敬請期待</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">重磅系列</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">內著系列</a></li>
+                </ul>
+              </li>
+              <li><a href="#" style="font-size: 15px;">穿搭指南</a></li>           
+              <li>
+                <a href="store.html" style="font-size: 15px;">實體門市</a>
+                <ul class="nav-dropdown">
+                  <li><a href="#" target="_blank" style="font-size: 14px;">公益資展館</a></li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">北屯總太館</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+      <!-- 聯絡我們彈出視窗 -->
+   <div id="comment" class="comment" onclick="closeComment()">
+       <!-- 事件捕獲(冒泡) -->
+     <div class="comment-content" onclick="event.stopPropagation()"> 
+      <h5>聯絡我們</h5>
+      <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>
+      <input type="radio" checked>電子郵件
+      <input type="radio">手機號碼<br>
+      <input type="text" class="email-input" placeholder="請輸入你的電子信箱"><br>
+      <input type="text" class="message-input" placeholder="請輸入你的訊息，詢問店內商品，請留下商品名稱，謝謝！">
+      <button id="comment-send">發送</button>
+      <input type="radio">
+     </div>
+   </div>
+  </header>
+<!-- 購物車 -->
+  <div class="basketcart">
+  <main>
+    <div class="basket">
+      <div class="basket-labels">
+        <ul class="producttitle">
+          <li class="item">商品</li>
+          <li class="quantity">數量</li>
+          <li class="item-price">單價</li>
+          <li class="item-subtotal">小計</li>
+        </ul>
+      </div>
+      <div id="cart-items">
+      </div>
+      <div class="basket-module">
+        <br>
+        <br>
+        <br>
+        <br>
+        <span class="cart-arrow-down"><i class="fas fa-cart-arrow-down fa-fade fa-2xl" style="color: #aaaaaa"></i></span>
+        <h2 id="totalprice"></h2>
+        <!-- <label for="promo-code">請輸入優惠代碼</label> -->
+        <!-- <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field"> -->
+        <span class="discount">優惠促銷</span>
+        <span class="discountcontent">消費滿2000即享免運優惠</span>
+        <span class="buynofare">再買NT$</span>
+        <span id="buynofarevalue" class="buynofare"></span>
+        <span class="buynofare">即享有免運</span>
+        <a href="index.html" class="promo-code-cta">繼續選購</a>
+      </div>
+    </div>
+    <aside class="cart-items-total">
+      <div class="summary">
+        <div class="summary-total-items"><span class="total-items"></span> 訂單資訊</div>
+        <div class="summary-subtotal">
+          <div class="subtotal-title">合計</div>
+          <div class="subtotal-value final-value" id="total-price"></div>
+        </div>
+        <div class="freight">
+          <div class="fare">運費</div>
+          <div class="fare-value"></div>
+        </div>
+        <div class="summary-total">
+          <div class="total-title">總金額</div>
+          <div class="total-value final-value" id="basket-total"></div>
+        </div>
+        <div class="summary-checkout">
+          <a href="member.html" class="checkout-cta">前往結帳</a>
+          <a href="index.html" id="go-to-home">繼續選購</a>
+        </div>
+      </div>
+    </aside>
+  </main>
+</div>
+<footer class="site-footer">
+  <hr>
+  <div class="footer-container">
+    <div class="row">
+      <div class="col-xs-6 col-md-3">
+          <h6>認識Jason.js</h6>
+          <ul class="footer-links">
+            <li><a href="#">blog</a></li>
+            <li><a href="#">關於我們</a></li>
+            <li><a href="#">產品製程</a></li>
+            <li><a href="#">門市據點</a></li>
+          </ul>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6><img class="footericons" src="../src/image/footericon1.png">七天鑑賞期</h6>
+        <ul class="footer-links">
+          <li><a>全館使用Email，寄送電子發票。</a></li>
+          <li><a>商品退換貨請於收件內七天與客服聯繫</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6><img class="footericons" src="../src/image/footericon2.png">購物常見問題</h6>
+        <ul class="footer-links">
+          <li><a href="#">運送政策</a></li>
+          <li><a href="#">售後服務</a></li>
+          <li><a href="#">退換貨政策</a></li>
+          <li><a href="#">隱私權政策</a></li>
+          <li><a href="#">常見問題Q&A</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <h6>聯絡我們</h6>
+        <ul class="footer-links">
+          <li><a>週一至週五 09:00~17:00 (例假日除外)</a></li>
+          <li><a href="#">LINE1對1客服 請搜尋ID：【 @chih_chung_li 】</a></li>
+        </ul>
+        <div class="col-xs-6">
+          <ul class="social-icons">
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a class="line" href="#"><i class="fa-brands fa-line"></i></a></li>   
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">&copy; 2023 Jason.js素T專賣</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'><script  src="../src/js/menuscript.js"></script>
+</html>

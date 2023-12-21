@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jason.js素T專賣</title>
+  <link rel="stylesheet" href="../src/style/menustyle.css">
+  <link rel="stylesheet" href="../src/style/comment.css">
+  <link rel="stylesheet" href="../src/style/adstyle.css">
+  <link rel="stylesheet" href="../src/style/productsstyle.css">
+  
+  <script src="https://kit.fontawesome.com/98c7318cff.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="shortcut icon" href="../src/image/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <header class="header_area">
+    <div class="main_header_area animated">
+      <div class="container">
+        <nav id="navigation1" class="navigation">
+          <div class="nav-header">
+            <a href="index.html"><img id='logo' src="../src/image/jasonlogo.png" alt="My Logo" width="75"
+                height="75"></a>
+            <a class="nav-brand" href="index.html">Jason.js素T專賣</a>
+            <div class="nav-toggle"></div>
+          </div>
+          <div class="nav-search">
+            <span class="nav-search-button"><i class="fas fa-magnifying-glass fa-lg"></i></span>
+            <span class="nav-comment-button" onclick="openComment()"><i class="fas fa-comment fa-lg"></i></span>
+            <a href="member.html"><span class="nav-user-button"><i class="fas fa-user fa-lg"></i></span></a>
+            <a href="chart.html"><span class="nav-cart-button"><i class="fas fa-shopping-basket fa-lg"></i></span></a>
+            <form>
+              <div class="nav-search-inner">
+                <input type="search" name="search" placeholder="找商品" />
+              </div>
+            </form>
+          </div>
+          <span id="piecesofcartitem">0</span>
+          <div class="nav-menus-wrapper">
+            <ul class="nav-menu align-to-left">
+              <li><a id="home" href="index.html" target="_blank" style="font-size: 15px;">首頁</a></li>
+              <li>
+                <a href="#" style="font-size: 15px;">版型風格</a>
+                <ul class="nav-dropdown">
+                  <li>
+                    <a href="#" style="font-size: 14px;">短袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank" style="font-size: 14px;">日常T ｜ 質感好穿搭</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">顯肌T ｜ 襯托傲人肌</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">重磅T ｜ 杜絕激凸</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">長袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li>
+                        <a href="#">敬請期待</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">重磅系列</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">內著系列</a></li>
+                </ul>
+              </li>
+              <li><a href="#" style="font-size: 15px;">穿搭指南</a></li>
+              <li>
+                <a href="store.html" style="font-size: 15px;">實體門市</a>
+                <ul class="nav-dropdown">
+                  <li><a href="#" target="_blank" style="font-size: 14px;">公益資展館</a></li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">北屯總太館</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- 聯絡我們彈出視窗 -->
+    <div id="comment" class="comment" onclick="closeComment()">
+      <!-- 事件捕獲(冒泡) -->
+      <div class="comment-content" onclick="event.stopPropagation()">
+        <h5>聯絡我們</h5>
+        <p id="123">謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>
+        <input type="radio" checked>電子郵件
+        <input type="radio">手機號碼<br>
+        <input type="text" class="email-input" placeholder="請輸入你的電子信箱"><br>
+        <input type="text" class="message-input" placeholder="請輸入你的訊息，詢問店內商品，請留下商品名稱，謝謝！">
+        <button id="comment-send">發送</button>
+      </div>
+    </div>
+  </header>
+  <div id="slideshow">
+    <img id="../src/image/slideshow1" class="active" src="../src/image/rotationad1.JPG" />
+    <img id="../src/image/slideshow2" src="../src/image/rotationad2.jpeg" />
+    <img id="../src/image/slideshow3" src="../src/image/rotationad3.JPG" />
+    <img id="../src/image/slideshow4" src="../src/image/rotationad4.JPG" />
+    <div id="rotationbtn">
+      <label for="page1" class="page"></label>
+      <input type="radio" name="page" id="page1" checked>
+      <label for="page2" class="page"></label>
+      <input type="radio" name="page" id="page2">
+      <label for="page3" class="page"></label>
+      <input type="radio" name="page" id="page3">
+      <label for="page4" class="page"></label>
+      <input type="radio" name="page" id="page4">
+    </div>
+
+  </div>
+  <div class="slogan">
+    <p>"Just Significant. &nbsp&nbsp&nbsp Make it Simple."</p>
+    <p>極 簡 黑 白 時 尚</p>
+  </div>
+  <div class="index-ad1">
+    <div class="innerindexad1">
+      <img id="ad1" src="../src/image/innerindexad1.jpeg">
+    </div>
+    <div class="innerindexad1">
+      <img id="ad2" src="../src/image/innerindexad2.jpeg">
+    </div>
+  </div>
+
+  <div class="index-ad2">
+    <img id="ad4" src="../src/image/innerindexad4.jpeg">
+  </div>
+  <!-- 商品列表 -->
+  <div id="popproducts"></div>
+  <div class="index-ad2">
+    <img id="ad3" src="../src/image/innerindexad3.jpeg">
+  </div>
+  <!-- 商品列表 -->
+  <div id="products"></div>
+  <!-- 彈出視窗 -->
+  <div id="popup" class="popup" onclick="closePopup()"></div>
+  <script src="../src/js/productsscript.js"></script>
+  <button id="btnTop" onclick="scrollToTop()">回到最頂端</button>
+  <footer class="site-footer">
+    <hr>
+    <div class="footer-container">
+      <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <h6>認識Jason.js</h6>
+          <ul class="footer-links">
+            <li><a href="#">blog</a></li>
+            <li><a href="#">關於我們</a></li>
+            <li><a href="#">產品製程</a></li>
+            <li><a href="#">門市據點</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon1.png">七天鑑賞期</h6>
+          <ul class="footer-links">
+            <li><a>全館使用Email，寄送電子發票。</a></li>
+            <li><a>商品退換貨請於收件內七天與客服聯繫</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon2.png">購物常見問題</h6>
+          <ul class="footer-links">
+            <li><a href="#">運送政策</a></li>
+            <li><a href="#">售後服務</a></li>
+            <li><a href="#">退換貨政策</a></li>
+            <li><a href="#">隱私權政策</a></li>
+            <li><a href="#">常見問題Q&A</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6>聯絡我們</h6>
+          <ul class="footer-links">
+            <li><a>週一至週五 09:00~17:00 (例假日除外)</a></li>
+            <li><a href="#">LINE1對1客服 請搜尋ID：【 @chih_chung_li 】</a></li>
+          </ul>
+          <div class="col-xs-6">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a class="line" href="#"><i class="fa-brands fa-line"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">&copy; 2023 Jason.js素T專賣</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+  <script src="../src/js/menuscript.js"></script>
+  <script src="../src/js/adscript.js"></script>
+</body>
+
+</html>

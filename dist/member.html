@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員</title>
+  <link rel="stylesheet" href="../src/style/menustyle.css">
+  <link rel="stylesheet" href="../src/style/comment.css">
+  <link rel="stylesheet" href="../src/style/member.css">
+  <script src="https://kit.fontawesome.com/98c7318cff.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="shortcut icon" href="../src/image/favicon.ico" type="image/x-icon">
+</head>
+
+<script>
+  $(function () {
+    //購物車項目個數顯示
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    if (cart && cart.length > 0) {
+      $('#piecesofcartitem').text(cart.length)
+      $('#piecesofcartitem').css('display', 'inline-block')
+    } else {
+      $('#piecesofcartitem').hide()
+    }
+    $('#tab-content .tab-item:first').show();
+
+    // 點擊選項卡切換對應內容
+    $('#tab-container .tab').click(function () {
+      // 當前選中的選項卡
+      $(this).addClass('active').siblings().removeClass('active');
+      // 對應的內容
+      var tab = $(this).data('tab');
+      $('#' + tab).addClass('active').siblings().removeClass('active');
+    });
+
+  })
+</script>
+
+<body>
+  <header class="header_area">
+    <div class="main_header_area animated">
+      <div class="container">
+        <nav id="navigation1" class="navigation">
+          <div class="nav-header">
+            <a href="index.html"><img id='logo' src="../src/image/jasonlogo.png" alt="My Logo" width="75"
+                height="75"></a>
+            <a class="nav-brand" href="index.html">Jason.js素T專賣</a>
+            <div class="nav-toggle"></div>
+          </div>
+          <div class="nav-search">
+            <span class="nav-search-button"><i class="fas fa-magnifying-glass fa-lg"></i></span>
+            <span class="nav-comment-button" onclick="openComment()"><i class="fas fa-comment fa-lg"></i></span>
+            <a href="member.html"><span class="nav-user-button"><i class="fas fa-user fa-lg"></i></span></a>
+            <a href="chart.html"><span class="nav-cart-button"><i class="fas fa-shopping-basket fa-lg"></i></span></a>
+            <form>
+              <div class="nav-search-inner">
+                <input type="search" name="search" placeholder="找商品" />
+              </div>
+            </form>
+          </div>
+          <span id="piecesofcartitem">0</span>
+          <div class="nav-menus-wrapper">
+            <ul class="nav-menu align-to-left">
+              <li><a id="home" href="index.html" target="_blank" style="font-size: 15px;">首頁</a></li>
+              <li>
+                <a href="#" style="font-size: 15px;">版型風格</a>
+                <ul class="nav-dropdown">
+                  <li>
+                    <a href="#" style="font-size: 14px;">短袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank" style="font-size: 14px;">日常T ｜ 質感好穿搭</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">顯肌T ｜ 襯托傲人肌</a></li>
+                      <li><a href="#" target="_blank" style="font-size: 14px;">重磅T ｜ 杜絕激凸</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">長袖素T</a>
+                    <ul class="nav-dropdown">
+                      <li>
+                        <a href="#">敬請期待</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                          <li><a href="#" target="_blank">敬請期待</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" style="font-size: 14px;">重磅系列</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                      <li><a href="#" target="_blank">敬請期待</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">內著系列</a></li>
+                </ul>
+              </li>
+              <li><a href="#" style="font-size: 15px;">穿搭指南</a></li>
+              <li>
+                <a href="store.html" style="font-size: 15px;">實體門市</a>
+                <ul class="nav-dropdown">
+                  <li><a href="#" target="_blank" style="font-size: 14px;">公益資展館</a></li>
+                  <li><a href="#" target="_blank" style="font-size: 14px;">北屯總太館</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- 聯絡我們彈出視窗 -->
+    <div id="comment" class="comment" onclick="closeComment()">
+      <!-- 事件捕獲(冒泡) -->
+      <div class="comment-content" onclick="event.stopPropagation()">
+        <h5>聯絡我們</h5>
+        <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>
+        <input type="radio" checked>電子郵件
+        <input type="radio">手機號碼
+        <input type="text" class="email-input" placeholder="請輸入你的電子信箱"><br>
+        <input type="text" class="message-input" placeholder="請輸入你的訊息，詢問店內商品，請留下商品名稱，謝謝！">
+        <button id="comment-send">發送</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="account">
+    <div id="tab-container">
+      <div class="tab active" data-tab="login">會員登入</div>
+      <div class="tab" data-tab="register">註冊會員</div>
+    </div>
+    <div id="tab-content">
+      <div id="login" class="tab-item active">
+        <h5 id="logintitle">會員登入</h5>
+        <form>
+          <label for="email">電子郵件：</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="password">密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp碼：</label>
+          <input type="password" id="password" name="password"><br><br>
+          <input type="submit" value="登入"><br>
+          <a id="forgetpassword" href="#">忘記密碼？</a>
+        </form>
+      </div>
+      <div id="register" class="tab-item">
+        <h5 id="registertitle">註冊會員</h5>
+        <form>
+          <label for="email">電子郵件：</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="password">密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp碼：</label>
+          <input type="password" id="password" name="password"><br><br>
+          <label for="password">確認密碼：</label>
+          <input type="password" id="password" name="password"><br><br>
+          <label for="gender">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp別：</label>
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male">生理男</label>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">生理女</label>
+          <input type="radio" id="other" name="gender" value="other">
+          <label for="other">不透露</label><br><br>
+          <label id="birthday" for="birthday">生&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp日：</label>
+          <input type="date" id="birthday" name="birthday"><br><br>
+          <input type="checkbox" name="sendmail" value="agree"> 我願意接收 Jason.js 素T專賣 的最新消息、優惠及服務推廣相關資訊<br>
+          <input type="checkbox" name="policy" value="agree"> 我同意網站<a href="#">服務條款</a>及<a href="#">隱私權政策</a><br><br>
+          <input type="submit" value="立即加入">
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <hr>
+    <div class="footer-container">
+      <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <h6>認識Jason.js</h6>
+          <ul class="footer-links">
+            <li><a href="#">blog</a></li>
+            <li><a href="#">關於我們</a></li>
+            <li><a href="#">產品製程</a></li>
+            <li><a href="#">門市據點</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon1.png">七天鑑賞期</h6>
+          <ul class="footer-links">
+            <li><a>全館使用Email，寄送電子發票。</a></li>
+            <li><a>商品退換貨請於收件內七天與客服聯繫</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6><img class="footericons" src="../src/image/footericon2.png">購物常見問題</h6>
+          <ul class="footer-links">
+            <li><a href="#">運送政策</a></li>
+            <li><a href="#">售後服務</a></li>
+            <li><a href="#">退換貨政策</a></li>
+            <li><a href="#">隱私權政策</a></li>
+            <li><a href="#">常見問題Q&A</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <h6>聯絡我們</h6>
+          <ul class="footer-links">
+            <li><a>週一至週五 09:00~17:00 (例假日除外)</a></li>
+            <li><a href="#">LINE1對1客服 請搜尋ID：【 @chih_chung_li 】</a></li>
+          </ul>
+          <div class="col-xs-6">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a class="line" href="#"><i class="fa-brands fa-line"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">&copy; 2023 Jason.js素T專賣</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<script src="../src/js/menuscript.js"></script>
+
+</html>

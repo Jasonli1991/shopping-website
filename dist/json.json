@@ -1,0 +1,201 @@
+{
+    "productsData": [
+      {
+        "data-id": "1",
+        "data-name": "｜大衛｜ David",
+        "data-price": "590",
+        "data-image": "../src/image/davidmain.jpeg",
+        "info": {
+          "description1": "新手入門 首選單品",
+          "description2": "冠軍熱銷單品<br>極加彈力襯托你衣服底下的健壯零束縛體感-出外跑跳｜室內辦公，動靜皆自如質感中的上品，展現不羈風格"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "2",
+        "data-name": "｜維托｜ Victo",
+        "data-price": "690",
+        "data-image": "../src/image/victomain.jpeg",
+        "info": {
+          "description1": "合身不貼身 完美版型",
+          "description2": "大衛熱銷單品2.0➤質感中的上品流暢展現身體曲線，健壯身材一覽無遺絲滑膚觸，帶給你素T界的極致體驗"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "3",
+        "data-name": "｜馬克｜ Mark",
+        "data-price": "690",
+        "data-image": "../src/image/markmain.jpeg",
+        "info": {
+          "description1": "時尚剪裁 不挑身型",
+          "description2": "領圍微縮，舒適俐落縮肩剪裁，視覺修飾"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "4",
+        "data-name": "｜飛魚｜ Flying Fish",
+        "data-price": "690",
+        "data-image": "../src/image/fishmain.jpeg",
+        "info": {
+          "description1": "短版修身 視覺增高",
+          "description2": "肩寬內縮，視覺修身衣長修短，修飾腿長"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "5",
+        "data-name": "｜盔甲｜ Armour",
+        "data-price": "590",
+        "data-image": "../src/image/armourmain.jpeg",
+        "info": {
+          "description1": "重磅首選 舒適硬挺",
+          "description2": "超重磅，不激凸，且材質親膚<br>不同於一般重磅的刺膚感<br>直筒版型設計，適合各種身型"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "6",
+        "data-name": "｜西克｜ Thick",
+        "data-price": "590",
+        "data-image": "../src/image/thickmain.jpeg",
+        "info": {
+          "description1": "11oz 重磅升級 短版視覺顯高",
+          "description2": "全新升級棉料，短版視覺顯高<br>絕對不同於市面上一般重磅T<br>新一代更厚磅，給你雙倍的安全感"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "7",
+        "data-name": "｜繆思｜ Muse",
+        "data-price": "620",
+        "data-image": "../src/image/musemain.jpeg",
+        "info": {
+          "description1": "都會女伶 U領顯腰 T 修身剪裁 俐落穿著",
+          "description2": "大U領設計，休閒時尚<br>修身剪裁，俐落穿著"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "8",
+        "data-name": "｜賈伯斯｜ Jobs",
+        "data-price": "690",
+        "data-image": "../src/image/jobsmain.jpeg",
+        "info": {
+          "description1": "重磅修身 挺立不透膚",
+          "description2": "布料厚實親膚，安全不透膚<br>直筒版型，隱藏微肉小腹"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "9",
+        "data-name": "｜馬龍｜ Malone",
+        "data-price": "590",
+        "data-image": "../src/image/malonemain.jpeg",
+        "info": {
+          "description1": "11oz超重磅 日系落肩 率性風采",
+          "description2": "落肩五分袖，打造日系休閒感<br>厚實看的到，擺脫透膚的尷尬感<br>雙股緊密織造，一件，就可以穿很久"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "10",
+        "data-name": "｜琳賽｜ Linsa",
+        "data-price": "590",
+        "data-image": "../src/image/linsamain.jpeg",
+        "info": {
+          "description1": "直筒版型，修飾身材",
+          "description2": "直筒版型，隱藏腰間贅肉<br>拔挺布料，厚實手感<br>適合洗練的極簡風格。"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "11",
+        "data-name": "｜奥蘿拉｜ Aurora",
+        "data-price": "590",
+        "data-image": "../src/image/auroramain.jpeg",
+        "info": {
+          "description1": "簡約街頭風 自然率性舒適",
+          "description2": "經典熱銷單品 適合各種身型<br>寬鬆休閒 長版遮肉"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      },
+      {
+        "data-id": "12",
+        "data-name": "｜柯本｜ K．Cobain",
+        "data-price": "580",
+        "data-image": "../src/image/cobainmain.jpeg",
+        "info": {
+          "description1": "輕薄舒適 親膚透氣",
+          "description2": "竹節棉料，無所拘束的體感<br>直筒軀幹版型，有效修飾身型<br>夏日防曬、春秋抗溫差、冬日家居服，四季冠軍必備款"
+        },
+        "style": {
+          "color1": "black",
+          "color2": "white",
+          "color3": "olive-green"
+        }
+      }
+    ],
+    "customersData": [
+      {
+        "name": "jason",
+        "account": "jason123",
+        "code": "135246"
+      },
+      {
+        "name": "mary",
+        "account": "mary123",
+        "code": "246789"
+      },
+      {
+        "name": "peter",
+        "account": "peter123",
+        "code": "976123"
+      }
+    ]
+  }

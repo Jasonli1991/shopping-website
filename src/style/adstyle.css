@@ -1,0 +1,142 @@
+#slideshow1, 
+#slideshow2, 
+#slideshow3, 
+#slideshow4, 
+#ad1, 
+#ad2, 
+#ad3,
+#ad4 {
+  max-width: 100%;
+  height: auto;
+}
+
+/* *{
+  padding: 0;
+  margin: 0;
+} */
+#rotationbtn {
+  display: none;
+}
+#slideshow{
+  width: 1512px;  
+  height: 600px;
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;  
+  z-index: 1;
+}
+#slideshow img{
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  position: absolute; /*絕對定位左上角，重疊在一起*/
+  top: 0;
+  left: 0;
+  opacity: 0; /*初始不透明度，先讓圖片不見*/
+  transition: opacity 1s linear; /*--定義關於透明度的transition*/
+}
+#slideshow img.active{
+  opacity: 1; /*有active類的圖片不透明度為1，即顯示圖片*/
+}
+/*-- 頁碼樣式 --*/
+#slideshow div{
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+#slideshow span{
+  display: inline-block;
+  width: 15px;
+  line-height: 15px; 
+  border-radius: 25px;
+  margin: 0 5px;
+  background: white;
+}
+#slideshow span.active{
+  color: white;
+  background: #606060;
+}
+/*-- 圖片描述文本樣式 --*/
+#slideshow p{
+  position: absolute;
+  top: 30px;
+  left: -400px; /*相對於輪播圖左側左移400px*/
+  line-height: 30px;
+  padding: 5px 30px;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(100,100,100,0.6); /*用rgba設置一個帶透明度的背景顏色*/
+  opacity: 0;
+  transition: all 0.5s;
+}
+#slideshow p.active{
+  left: 0;
+  opacity: 1;
+}
+/* input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+} */
+/* label {
+  display: inline-block;
+  width: 18px;
+  height: 10px;
+  background-color: white;
+  border: 2px solid wheat;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#rotationbtn {
+  margin-bottom: -15px;
+  margin-left: 700px;
+}
+label.active {
+  background-color: #ddd;
+  border-color: #aaa;
+}
+
+label:hover {
+  background-color: wheat;
+}
+
+.page.active {
+  background-color: red;
+} */
+
+
+  /* 圖文廣告 */
+  .slogan {
+    display: block;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin: 50px;
+  }
+  .index-ad1{
+    text-align: center;
+  }
+  .innerindexad1 {
+    display: inline-block;
+    margin: 30px;
+    text-align: center;
+  }
+  #ad1,
+  #ad2 {
+    width: 600px;
+  }
+  .index-ad2 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+  }
+  #ad3, 
+  #ad4 {
+    display: flex;
+    margin-top: 30px;
+  }
+  

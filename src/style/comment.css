@@ -1,0 +1,83 @@
+/* 聯絡我們 */
+.comment {
+	display: none; /* 預設不顯示 */
+	position: fixed; /* 固定位置 */
+	top: 0; /* 與上方的距離 */
+	left: 0; /* 與左側的距離 */
+	width: 100%; /* 寬度佔滿整個畫面 */
+	height: 100%; /* 高度佔滿整個畫面 */
+	background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色底 */
+	z-index: 999; /* 顯示在最上層 */
+}
+
+.comment-content {
+	position: absolute; /* 絕對位置 */
+	top: 50%; /* 上方與中心對齊 */
+	left: 50%; /* 左側與中心對齊 */
+	transform: translate(-50%, -50%); /* 調整位置到中心 */
+	background-color: white; /* 白色背景 */
+	padding: 20px; /* 內距 */
+	border-radius: 5px; /* 圓角 */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 陰影效果 */
+}
+  .comment-content h5 {
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-content p {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.comment-content input[type="radio"] {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.email-input {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+}
+.message-input {
+  margin-top: 10px;
+  height: 80px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+}
+
+
+.comment-content #comment-send {
+  margin-top: 20px;
+  background-color: #f5bf42;
+  border: 1px solid #f5bf42;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-left: 380px;
+}
+
+.comment-content #comment-send:hover {
+  background-color: white;
+  border: 1px solid #f5bf42;
+  color:#f5bf42;
+}

@@ -1,0 +1,176 @@
+#products, 
+#popproducts {
+    display: block;
+    text-align: center;
+}
+
+.product {
+    /* border: 1px solid #ccc; */
+    /* padding: 10px; */
+    margin: 20px;
+    width: 320px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center
+}
+.product img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 10px
+}
+.product h3 {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin: 0;  
+}
+.product h2 {
+    display: none;
+}
+.product h1 {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin: 10px;  
+}
+.product p {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: 900;
+    color: #f6b00e;
+    margin-bottom: 10px
+}
+.wantBuy {
+    background-color: #dbd8d8;
+    border: 1px solid #dbd8d8;
+    color: #363534;
+    padding: 5px 100px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 20px
+}
+.wantBuy:hover {
+    background-color: white;
+    border: 1px solid #f6b00e;
+    color: #f6b00e;
+}
+/* 定義彈出視窗的樣式 */
+.popup {
+	display: none; 
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	z-index: 999 /* 顯示在最上層 */
+}
+.popup-content {
+	position: absolute; 
+	top: 50%; /* 上方與中心對齊 */
+	left: 50%; /* 左側與中心對齊 */
+	transform: translate(-50%, -50%); /* 調整位置到中心 */
+	background-color: white; 
+	padding: 20px; 
+	border-radius: 5px; 
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    /* flex: 1; */
+    display: flex;
+}
+.left-div {
+    position: relative;
+    width: 350px;
+    text-align: center;
+    /* background-color: green; */
+}
+  .right-div {
+    position: relative;
+    width: 250px;
+    /* background-color: pink; */
+    margin-left: 10px;
+    /* position: absolute;
+    top: 50%;
+    right: 0; */
+}
+
+#popupImg {
+    /* border: 1px solid black; */
+    /* width: 00%; */
+    /* background-color: green; */
+    border: none;
+    height: 350px;
+    object-fit: contain;
+    /* float: left; */
+    /* margin-right: 10px */
+}
+
+#productName {
+    /* text-align: center; */
+    font-size: 18px;
+}
+#productID {
+    display: none;
+}
+#description1 {
+    /* text-align: center; */
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 6px;
+}
+#description2 {
+    display: none;
+}
+
+#div-price {
+    text-align: center;
+    margin-top: 30px;
+}
+#pprice {
+    font-size: 18px;
+    color: #f6b00e;
+}
+#productPrice {
+    font-size: 18px;
+    color: #f6b00e;
+}
+#color-options {
+    margin-top: 100px;
+}
+#color-options input{
+    margin: 2px;
+}
+#size-options input{
+    margin: 2px;
+}
+#quan {
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+}
+.popup-content label {
+    color: #626562;
+    font-size: 14px;
+}
+
+#div-add-to-cart {
+    text-align: center;
+    margin-top: 20px;
+}
+.add-to-cart {
+    width: 200px;
+    height: 30px;
+    font-size: 14px;
+    background-color: #f6b00e;
+    color: white;
+    border: 1px solid #f6b00e;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.add-to-cart:hover {
+    background-color: white;
+    color:  #f6b00e;   
+    border: 1px solid #f6b00e;
+}
